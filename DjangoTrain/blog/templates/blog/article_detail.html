@@ -1,0 +1,34 @@
+{% extends 'blog/base.html' %}
+
+{% block title %} | {{object.Title}} {% endblock %}
+
+{% block main %}
+<!-- Page Header-->
+<header class="masthead" style='background-image: url("{{ object.Thumbnail.url }}")'>
+    <div class="container position-relative px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <div class="site-heading">
+                    <h1>{{ object.Title }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- Post Content-->
+<article class="mb-4">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                {{ object.Description|linebreaks }}
+                </p>
+                <p class="post-meta">
+                    نوشته شده توسط
+                   <a href="#!">سعید</a>
+                   {{ object.jpublish }}
+                </p>
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock %}
