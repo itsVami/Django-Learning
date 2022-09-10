@@ -11,6 +11,7 @@
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
+                        <h3>{% block header2 %}  {% endblock %}</h3>
                         <h1>{% block header %}  {% endblock %}</h1> 
                 </div>
             </div>
@@ -31,7 +32,7 @@
                     </a>
                     <p class="post-meta">
                         نوشته شده توسط
-                        <a href="#!">سعید</a>
+                        <a href="{% url 'blog:author' article.Author %}">{{ article.Author.first_name}}</a>
                         {{ article.jpublish }}
                     </p>
                     <div>

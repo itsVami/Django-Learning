@@ -2,6 +2,8 @@ from django.db import models
 from django.utils import timezone
 from extentions.utils import jalali_conventor
 from django.utils.html import format_html
+from django.contrib.auth.models import User
+
 
 
 #My_Managers
@@ -40,6 +42,7 @@ class Article (models.Model):
         ('d' , "پیش نویس"),
         ('p' , "منتشر شده"),
     )
+    Author = models.ForeignKey(User , null = True , on_delete = models.SET_NULL , related_name = 'articles' , verbose_name = 'نویسنده')
     Title = models.CharField(max_length=200 , verbose_name ='عنوان مقاله')
     Slug = models.SlugField(max_length=100 , unique=True , verbose_name ='آدرس مقاله')
     CategoryRE = models.ManyToManyField(Category , related_name="articles" , verbose_name='دسته بندی')
@@ -67,3 +70,4 @@ class Article (models.Model):
     thumbnail_tag.short_description = "عکس"
 
     objects = ArticleManager()
+    

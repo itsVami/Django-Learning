@@ -1,0 +1,12 @@
+{% extends 'blog/list.html' %}
+
+
+{% block title2 %} {{ author.username }} {% endblock %}
+
+{% block header2 %} نویسنده {% endblock %}
+
+{% block header %} {{ author.get_full_name }} {% endblock %}
+
+{% block pagination_previous_url %} {% url 'blog:author' author.username page_obj.previous_page_number %} {% endblock %}
+
+{% block pagination_next_url %} {% url 'blog:author' author.username page_obj.next_page_number %} {% endblock %}

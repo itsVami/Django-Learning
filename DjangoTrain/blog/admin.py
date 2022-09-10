@@ -1,6 +1,6 @@
-from pickle import FALSE
 from django.contrib import admin
-from .models import Article , Category
+from .models import Article , Category 
+
 
 #َAdmin Page Header
 admin.site.site_header = "ادمین پنل وبسایت"
@@ -54,15 +54,15 @@ class CategoryAdmin(admin.ModelAdmin):
 admin.site.register(Category , CategoryAdmin)
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ('Title' , 'thumbnail_tag' , 'Slug' , 'jpublish' , 'Status' , 'Category_to_str')
-    list_filter = ('Publish' , 'Status')
+    list_display = ('Title' , 'thumbnail_tag' , 'Author' , 'Slug' , 'jpublish' , 'Status' , 'Category_to_str')
+    list_filter = ('Publish' , 'Status' , 'Author')
     search_fields = ('Title' , 'Description')
     prepopulated_fields = {'Slug' : ('Title' ,)}   #Auto_Slug
     ordering = ['-Status' , '-Publish']
     actions = [make_published , make_draft ]
 
     def Category_to_str(self , obj):
-        return " , ".join([Category.Title for Category in obj.actived()])
+        return " , ".join([CategoryRE.Title for CategoryRE in obj.CategoryRE.actived()])
     Category_to_str.short_description = "دسته بندی"
 
 admin.site.register(Article , ArticleAdmin)

@@ -24,7 +24,7 @@
                 </p>
                 <p class="post-meta">
                     نوشته شده توسط
-                   <a href="#!">سعید</a>
+                   <a href="{% url 'blog:author' object.Author %}">{{ object.Author.first_name}}</a>
                    {{ object.jpublish }}
                 </p>
             </div>
