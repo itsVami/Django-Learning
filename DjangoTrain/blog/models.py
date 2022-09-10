@@ -31,7 +31,6 @@ class Category (models.Model):
     def __str__(self):
         return self.Title  
 
-
     objects = CategoryManager()
 
 
@@ -62,9 +61,6 @@ class Article (models.Model):
     def jpublish(self):
         return jalali_conventor(self.Publish)
     jpublish.short_description = "زمان انتشار"
-
-    def category_publish(self):
-        return self.CategoryRE.filter(Status = True)
 
     def thumbnail_tag(self):
         return format_html("<img width=95 height=80 style='border-radius: 8px;' src='{}'>".format(self.Thumbnail.url))
