@@ -14,3 +14,11 @@ body {
     right: initial;
     left: 0;
 }
+
+.errors {
+    color: red;
+    background-color: #e49c9c70;
+    padding: 25px 30px;
+    text-align: center;
+}
+
