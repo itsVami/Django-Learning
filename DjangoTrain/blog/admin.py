@@ -61,9 +61,6 @@ class ArticleAdmin(admin.ModelAdmin):
     ordering = ['-Status' , '-Publish']
     actions = [make_published , make_draft ]
 
-    def Category_to_str(self , obj):
-        return " , ".join([CategoryRE.Title for CategoryRE in obj.CategoryRE.actived()])
-    Category_to_str.short_description = "دسته بندی"
 
 admin.site.register(Article , ArticleAdmin)
 

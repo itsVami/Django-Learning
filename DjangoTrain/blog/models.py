@@ -69,5 +69,9 @@ class Article (models.Model):
         return format_html("<img width=95 height=80 style='border-radius: 8px;' src='{}'>".format(self.Thumbnail.url))
     thumbnail_tag.short_description = "عکس"
 
+    def Category_to_str(self):
+        return " , ".join([CategoryRE.Title for CategoryRE in self.CategoryRE.actived()])
+    Category_to_str.short_description = "دسته بندی"
+
     objects = ArticleManager()
     
