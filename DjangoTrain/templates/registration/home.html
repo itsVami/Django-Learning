@@ -2,6 +2,8 @@
 
 {% block title %} لیست مقالات {% endblock %}
 
+{% block title-meta %} | لیست مقالات {% endblock %}
+
 {% block main %}
     <div class="row">
         <div class="col-12">
@@ -30,7 +32,7 @@
                                     <td>{{ article.Category_to_str }}</td>
                                     <td>{{ article.Author.get_full_name }}</td>
                                     <td>{{ article.jpublish }}</td>
-                                    <td>{{ article.Description | truncatewords:"30" }}</td>
+                                    <td>{{ article.Description | striptags | truncatewords:"30" }}</td>
                                     <td>
                                         {% if article.Status == 'p' %}
                                             <span class="badge badge-success">منتشر شده</span>
