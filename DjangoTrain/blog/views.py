@@ -2,7 +2,7 @@ from django.shortcuts import render , get_object_or_404
 # from django.http import HttpResponse 
 from .models import Article , Category
 from django.views.generic import ListView , DetailView
-from django.contrib.auth.models import User
+from account.models import User
 
 
 # def Home(request , page=1):
