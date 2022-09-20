@@ -46,6 +46,10 @@
                                         {% else %}
                                             <span class="badge badge-danger">پیش نویس</span>
                                         {% endif %}
+
+                                        {% if user.is_superuser %}
+                                            <a class="badge text-danger" href="{% url 'account:article-delete' article.pk %}"> حذف </a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                             {% endfor %}
