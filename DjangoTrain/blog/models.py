@@ -39,8 +39,10 @@ class Category (models.Model):
 
 class Article (models.Model):
     STATUS_CHOISECS = (
-        ('d' , "پیش نویس"),
-        ('p' , "منتشر شده"),
+        ('d' , "پیش نویس"), #draft
+        ('p' , "منتشر شده"), #publish
+        ('c' , "در حال بررسی"), #cheking
+        ('b' , "برگشت داده شده"), #backed
     )
     Author = models.ForeignKey(User , null = True , on_delete = models.SET_NULL , related_name = 'articles' , verbose_name = 'نویسنده')
     Title = models.CharField(max_length=200 , verbose_name ='عنوان مقاله')
