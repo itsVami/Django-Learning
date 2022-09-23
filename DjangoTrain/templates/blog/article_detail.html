@@ -20,7 +20,17 @@
     <div class="container px-4 px-lg-5">
         <div class="row gx-4 gx-lg-5 justify-content-center">
             <div class="col-md-10 col-lg-8 col-xl-7">
-                {{ object.Description|safe }}
+                {% if object.Is_special == True %}
+                    {% if user.is_authenticated and user.is_special_user or user == object.Author or user.is_superuser %}
+                        {{ object.Description|safe }}
+                    {% else %}
+                        <p>
+                            این مقاله ویژه است. برای مشاهده آن باید <a href="#">اشتراک ویژه</a> تهییه کنید.
+                        </p>
+                    {% endif %}
+                {% else %}
+                    {{ object.Description|safe }}   
+                {% endif %}
                 </p>
                 <p class="post-meta">
                     نوشته شده توسط

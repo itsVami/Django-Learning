@@ -21,6 +21,7 @@
                                 <th>نویسنده</th>
                                 <th>تاریخ انتشار</th>
                                 <th>خلاصه مقاله</th>
+                                <th>مقاله ویژه</th>
                                 <th>وضعیت</th>
                             </tr>
                             </thead>
@@ -40,6 +41,13 @@
                                         <td>{{ article.Author.get_full_name }}</td>
                                         <td>{{ article.jpublish }}</td>
                                         <td>{{ article.Description | striptags | truncatewords:"30" }}</td>
+                                        <td>
+                                            {% if article.Is_special %}
+                                                <i class="fa fa-check-circle" style="color: green;"></i>
+                                            {% else %}
+                                                <i class="fa fa-minus-circle" style="color: red;"></i>
+                                            {% endif %}
+                                        </td>
                                         <td>
                                             {% if article.Status == 'p' %}
                                                 <span class="badge badge-success">منتشر شده</span>

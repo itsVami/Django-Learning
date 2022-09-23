@@ -53,6 +53,7 @@ class Article (models.Model):
     Publish = models.DateTimeField(default=timezone.now , verbose_name ='زمان انتشار ')
     Created = models.DateTimeField(auto_now_add=True)
     Updated = models.DateTimeField(auto_now=True)
+    Is_special = models.BooleanField(default= False , verbose_name ='مقاله ویژه')
     Status = models.CharField(max_length=1 , choices=STATUS_CHOISECS , verbose_name ='وضعیت مقاله')
 
     class Meta :

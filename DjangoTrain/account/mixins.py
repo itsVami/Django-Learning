@@ -8,9 +8,9 @@ class FieldsMixin():
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_superuser:
-            self.fields = ["Author" , "Title" , "Slug" , "CategoryRE" , "Description" , "Thumbnail" , "Publish" , "Status"]
+            self.fields = ["Author" , "Title" , "Slug" , "CategoryRE" , "Description" , "Thumbnail" , "Publish" , "Is_special" , "Status"]
         elif request.user.Is_author:
-            self.fields = ["Title" , "Slug" , "CategoryRE" , "Description" , "Thumbnail" , "Publish"]
+            self.fields = ["Title" , "Slug" , "CategoryRE" , "Description" , "Thumbnail" , "Is_special" , "Publish"]
         else:
             raise Http404("You Can Not See This Page.")
         return super().dispatch(request, *args, **kwargs)
