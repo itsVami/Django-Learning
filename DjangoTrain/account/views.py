@@ -6,6 +6,8 @@ from blog.models import Article
 from .mixins import FieldsMixin , FormValidMixin , AuthorAccessMixin , DeleteAccessMixin
 from django.urls import reverse_lazy
 from .models import User
+from .forms import ProfileForm
+
 
 # Create your views here.
 
@@ -38,9 +40,7 @@ class ArticleDelete(DeleteAccessMixin , DeleteView):
 class Profile(UpdateView):
     template_name = "registration/profile.html"
     model = User
-    fields = [
-        'username' , 'email' , 'first_name' , 'last_name' , 'Special_user' , 'Is_author'
-    ]
+    form_class = ProfileForm
     success_url = reverse_lazy('account:profile')
 
     def get_object(self):
