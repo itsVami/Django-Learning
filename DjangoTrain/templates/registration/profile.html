@@ -27,9 +27,11 @@
                     <div class="col-6">
                         {{ form.last_name | as_crispy_field }}
                     </div>
-                    <div class="col-6">
-                        {{ form.Special_user | as_crispy_field }}
-                    </div>
+                    {% if  user.is_superuser or user.is_special_user %}
+                        <div class="col-6">
+                            {{ form.Special_user | as_crispy_field }}
+                        </div>
+                    {% endif %}
                     <div class="col-6">
                         {{ form.Is_author | as_crispy_field }}
                     </div>
