@@ -34,12 +34,14 @@
                     {% if user.is_superuser %}
                         <div class="col-6">
                             {{ form.Author | as_crispy_field }}
-                            {{ form.Is_special | as_crispy_field }}
                         </div>
                         <div class="col-6">
                             {{ form.Status | as_crispy_field }}
                         </div>
                     {% endif %}
+                    <div class="col-6">
+                        {{ form.Is_special | as_crispy_field }}
+                    </div>
                 </div>
                 <button class="btn btn-success">ارسال مقاله</button> 
                 {% if user.is_superuser and request.resolver_match.kwargs.pk %}

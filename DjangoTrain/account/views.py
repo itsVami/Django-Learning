@@ -7,6 +7,8 @@ from .mixins import FieldsMixin , FormValidMixin , AuthorAccessMixin , DeleteAcc
 from django.urls import reverse_lazy
 from .models import User
 from .forms import ProfileForm
+from django.contrib.auth.views import LoginView
+
 
 
 # Create your views here.
@@ -37,7 +39,7 @@ class ArticleDelete(DeleteAccessMixin , DeleteView):
     success_url = reverse_lazy('account:home')
 
 
-class Profile(UpdateView):
+class Profile(LoginRequiredMixin , UpdateView):
     template_name = "registration/profile.html"
     model = User
     form_class = ProfileForm
@@ -52,3 +54,14 @@ class Profile(UpdateView):
             'user' : self.request.user 
         })
         return kwargs
+
+
+class Login(LoginView):
+    
+    def get_success_url(self):
+        user = self.request.user
+
+        if user.is_superuser or user.Is_author:
+            return reverse_lazy('account:home')
+        else:
+            return reverse_lazy('account:profile')
