@@ -27,7 +27,7 @@
                 <!-- Post preview-->
                 <div class="post-preview">
                     <a href="{% url 'blog:details' article.Slug %}">
-                        <h2 class="post-title">{{ article.Title }}</h2>
+                        <h2 class="post-title">{{ article.Title }} {% if article.Is_special %} <span class="badge alert-danger" style="font-size: 15px ; border-radius: 5px ; float: left;" > ویژه </span> {% endif %}</h2>
                         <h3 class="post-subtitle">{{ article.Description | striptags | truncatewords:35 }}</h3>
                     </a>
                     <p class="post-meta">

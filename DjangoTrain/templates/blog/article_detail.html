@@ -10,6 +10,7 @@
             <div class="col-md-10 col-lg-8 col-xl-7">
                 <div class="site-heading">
                     <h1>{{ object.Title }}</h1>
+                    {% if article.Is_special %} <span class="badge alert-danger" style="font-size: 15px ; border-radius: 5px ; " > ویژه </span> {% endif %}
                 </div>
             </div>
         </div>
@@ -24,8 +25,9 @@
                     {% if user.is_authenticated and user.is_special_user or user == object.Author or user.is_superuser %}
                         {{ object.Description|safe }}
                     {% else %}
-                        <p>
-                            این مقاله ویژه است. برای مشاهده آن باید <a href="#">اشتراک ویژه</a> تهییه کنید.
+                        {{ article.Description | striptags | truncatewords:35 }}
+                        <p class="alert alert-warning">
+                            این مقاله ویژه است. برای مشاهده آن باید <a class="alert-warning" href="#">اشتراک ویژه</a> تهییه کنید.
                         </p>
                     {% endif %}
                 {% else %}
