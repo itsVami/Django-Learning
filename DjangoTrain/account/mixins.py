@@ -1,6 +1,6 @@
 from django.http import Http404
 from blog.models import Article
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404 , redirect
 
 #My Mixins 
 
@@ -44,3 +44,12 @@ class DeleteAccessMixin():
             return super().dispatch(request, *args, **kwargs)
         else:
             raise Http404("You Can Not See This Page.")
+
+
+class AuthorsAccessMixin():
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_superuser or request.user.Is_author :
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect('account:profile')
