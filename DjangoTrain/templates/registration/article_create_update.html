@@ -38,6 +38,14 @@
                         <div class="col-6">
                             {{ form.Status | as_crispy_field }}
                         </div>
+                    {% else %}
+                        <div class="col-6"style="padding: 30px;">
+                            <select name="Status" class="select form-control" required="" id="id_Status">
+                                <option value="" selected="">---------</option>
+                                <option value="d">پیش نویس</option>
+                                <option value="c">ارسال برای ادمین</option>                     
+                            </select>
+                        </div>
                     {% endif %}
                     <div class="col-6">
                         {{ form.Is_special | as_crispy_field }}

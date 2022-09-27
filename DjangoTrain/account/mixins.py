@@ -1,3 +1,4 @@
+from urllib import request
 from django.http import Http404
 from blog.models import Article
 from django.shortcuts import get_object_or_404 , redirect
@@ -7,12 +8,9 @@ from django.shortcuts import get_object_or_404 , redirect
 class FieldsMixin():
 
     def dispatch(self, request, *args, **kwargs):
+        self.fields = ["Title" , "Slug" , "CategoryRE" , "Description" , "Thumbnail" , "Publish" , "Is_special" , "Status"]
         if request.user.is_superuser:
-            self.fields = ["Author" , "Title" , "Slug" , "CategoryRE" , "Description" , "Thumbnail" , "Publish" , "Is_special" , "Status"]
-        elif request.user.Is_author:
-            self.fields = ["Title" , "Slug" , "CategoryRE" , "Description" , "Thumbnail" , "Is_special" , "Publish"]
-        else:
-            raise Http404("You Can Not See This Page.")
+            self.fields.append("Author")
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -23,7 +21,9 @@ class FormValidMixin():
         else:
             self.obj = form.save(commit = False)
             self.obj.Author = self.request.user
-            self.obj.Status = 'd'
+            if not self.obj.Status == 'c':
+                self.obj.Status = 'd'
+
         return super().form_valid(form)
 
 
