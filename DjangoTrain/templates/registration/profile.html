@@ -21,6 +21,14 @@
                     <div class="col-6">
                         {{ form.email | as_crispy_field }}
                     </div>
+                    <div class="col-12">
+                        <label class="my-4">
+                            تغیر گذرواژه:
+                        </label>
+                        <span>
+                            برای تغیر گذرواژه <a href="{% url 'account:password_change' %}">اینجا کلیک کنید.</a>
+                        </span>
+                    </div>
                     <div class="col-6">
                         {{ form.first_name | as_crispy_field }}
                     </div>
@@ -36,7 +44,7 @@
                         {{ form.Is_author | as_crispy_field }}
                     </div>
                 </div>
-                <button class="btn btn-success"> ویرایش مقاله </button> 
+                <button class="btn btn-danger"> ویرایش پروفایل </button> 
             </form>
         </div>
     </div>
