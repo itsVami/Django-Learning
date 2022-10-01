@@ -1,7 +1,7 @@
 {% extends 'registration/Lbase.html' %}
 {% load widget_tweaks %}
 
-{% block title %}ورود{% endblock %}
+{% block title %}ثبت نام{% endblock %}
 
 {% block main %}
 	<div class="limiter">
@@ -16,7 +16,7 @@
 			<div class="wrap-login100">
 				<form class="login100-form validate-form" method="post">{% csrf_token %}
 					<span class="login100-form-title p-b-26 myfont">
-						ورود به سایت
+						ثبت نام در سایت
 					</span>
 					<span class="login100-form-title p-b-48">
 						<i class="zmdi zmdi-account"></i>
@@ -34,14 +34,26 @@
 						<span class="focus-input100" data-placeholder="نام کاربری"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate="گذرواژه را وارد کنید">
+					<div class="wrap-input100 validate-input" data-validate="ایمیل را وارد کنید">
+						{{ form.email|add_class:"input100" }}
+						{% if form.email.errors %}
+							<div class="errors">
+								{% for error in form.email.errors %}
+									<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+						{% endif %}
+						<span class="focus-input100" data-placeholder="ایمیل"></span>
+					</div>
+
+                    <div class="wrap-input100 validate-input" data-validate="گذرواژه را وارد کنید">
 						<span class="btn-show-pass">
 							<i class="zmdi zmdi-eye"></i>
 						</span>
-						{{ form.password|add_class:"input100" }}
-						{% if form.password.errors %}
+						{{ form.password1|add_class:"input100" }}
+						{% if form.password1.errors %}
 							<div class="errors">
-								{% for error in form.password.errors %}
+								{% for error in form.password1.errors %}
 									<span>{{ error }}</span>
 								{% endfor %}
 							</div>
@@ -49,28 +61,32 @@
 						<span class="focus-input100" data-placeholder="گذرواژه"></span>
 					</div>
 
-					<a href="{% url 'password_reset' %}" class="myfont">فراموشی گذرواژه</a>
-					<br>
-					<a href="{% url 'register' %}" class="myfont">ثبت نام کنید</a>
+                    <div class="wrap-input100 validate-input" data-validate="گذرواژه را تکرار کنید">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+						{{ form.password2|add_class:"input100" }}
+						{% if form.password2.errors %}
+							<div class="errors">
+								{% for error in form.password2.errors %}
+									<span>{{ error }}</span>
+								{% endfor %}
+							</div>
+						{% endif %}
+						<span class="focus-input100" data-placeholder="تکرار گذرواژه"></span>
+					</div>
+
+					<a href="{% url 'login' %}" class="myfont">حسابی دارید؟ وارد شوید</a>
 
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
 							<button class="login100-form-btn myfont">
-								ورود
+								ثبت نام
 							</button>
 						</div>
 					</div>
 
-					<!-- <div class="text-center p-t-115">
-						<span class="txt1">
-							Don’t have an account?
-						</span>
-
-						<a class="txt2" href="#">
-							Sign Up
-						</a>
-					</div> -->
 				</form>
 			</div>
 		</div>
