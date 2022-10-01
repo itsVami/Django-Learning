@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from decouple import config 
 from pathlib import Path
 import os
 
@@ -25,7 +26,7 @@ LOGIN_URL = "login"
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-tz1rwcdebr#-d4fpmd%6s&aig4+uirri2@fkcouwojapa1_69m'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -145,5 +146,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 #User_Model
 AUTH_USER_MODEL = 'account.User'
 
-#Email_Send(Console)
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#Email_Setting
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+EMAIL_PORT = config('EMAIL_PORT')
