@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'extentions',
     'widget_tweaks',
     'crispy_forms',
+    'comment',
 ]
 
 MIDDLEWARE = [

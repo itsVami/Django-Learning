@@ -1,5 +1,7 @@
 {% extends 'blog/base.html' %}
 
+{% load comment_tags %}
+
 {% block title %} | {{object.Title}} {% endblock %}
 
 {% block main %}
@@ -39,6 +41,9 @@
                    <a href="{% url 'blog:author' object.Author %}">{{ object.Author.first_name}}</a>
                    {{ object.jpublish }}
                 </p>
+                <!-- Comment_System -->
+                {% render_comments object request %}
+                {% include_bootstrap %}
             </div>
         </div>
     </div>

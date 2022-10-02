@@ -4,7 +4,8 @@ from extentions.utils import jalali_conventor
 from django.utils.html import format_html
 from account.models import User
 from django.urls import reverse
-
+from django.contrib.contenttypes.fields import GenericRelation
+from comment.models import Comment
 
 #My_Managers
 class ArticleManager(models.Manager):
@@ -55,6 +56,7 @@ class Article (models.Model):
     Updated = models.DateTimeField(auto_now=True)
     Is_special = models.BooleanField(default= False , verbose_name ='مقاله ویژه')
     Status = models.CharField(max_length=1 , choices=STATUS_CHOISECS , verbose_name ='وضعیت مقاله')
+    comments = GenericRelation(Comment)
 
     class Meta :
         verbose_name = 'مقاله'
