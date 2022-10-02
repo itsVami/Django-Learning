@@ -40,9 +40,12 @@
                             {{ form.Special_user | as_crispy_field }}
                         </div>
                     {% endif %}
-                    <div class="col-6">
-                        {{ form.Is_author | as_crispy_field }}
+                    <div class="col-3">
+                        {{ form.Profile_Avatar | as_crispy_field }}
                     </div>
+                    <div class="col-3">
+                        {{ form.Is_author | as_crispy_field }}
+                    </div>                    
                 </div>
                 <button class="btn btn-danger"> ویرایش پروفایل </button> 
             </form>

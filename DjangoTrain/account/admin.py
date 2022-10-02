@@ -12,6 +12,13 @@ UserAdmin.fieldsets [2][1]['fields'] = (
                     "user_permissions",
 )
 
+UserAdmin.fieldsets [1][1]["fields"] = (
+                    "first_name", 
+                    "last_name", 
+                    "email",
+                    "Profile_Avatar",
+)
+
 UserAdmin.list_display += ("Is_author" , "is_special_user")
 
 

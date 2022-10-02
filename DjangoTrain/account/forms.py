@@ -20,7 +20,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = [
-            'username' , 'email' , 'first_name' , 'last_name' , 'Special_user' , 'Is_author'
+            'username' , 'email' , 'first_name' , 'last_name' , 'Special_user' , 'Is_author' , 'Profile_Avatar'
         ]
 
         
