@@ -1,3 +1,4 @@
+from pickle import FALSE
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.loader import render_to_string
 from django.utils import timezone
@@ -11,6 +12,9 @@ from comment.responses import UTF8JsonResponse
 from comment.messages import EmailError
 from comment.views import CommentCreateMixin, BaseCommentView
 
+from django.core.mail import EmailMessage
+from django.contrib.sites.shortcuts import get_current_site
+from django.urls import reverse
 
 class CreateComment(CanCreateMixin, CommentCreateMixin):
     comment = None
@@ -42,6 +46,45 @@ class CreateComment(CanCreateMixin, CommentCreateMixin):
         )
         self.comment = self.perform_create(temp_comment, self.request)
         self.data = render_to_string(self.get_template_names(), self.get_context_data(), request=self.request)
+        #Email_Config
+        Current_site = get_current_site(self.request)
+        Article = self.comment.content_object
+        Author_email = Article.Author.email
+        User_email = self.comment.user.email
+        if Author_email == User_email :
+            Author_email = False
+            User_email = False
+
+        Parent_Email = False
+        if self.comment.parent :
+            Parent_Email = self.comment.parent.user.email
+            if Parent_Email in [Author_email , User_email]:
+                Parent_Email = False
+        
+        if Author_email:
+            Email = EmailMessage(
+                        'دیدگاه جدید', 
+                        'دیدگاه جدیدی برای مقاله "{}" که شما نویسنده آن هستید ثبت شده. برای مشاهده روی لینک مقابل کلیک کنید.  {}{}'.format(Article , Current_site , reverse('blog:details' , kwargs={'slug':Article.Slug})), 
+                        to=[Author_email],
+            )
+            Email.send()
+
+            if User_email:
+                Email = EmailMessage(
+                        'دیدگاه شما فرستاده شد.', 
+                        'دیدگاه شما نسبت به پست "{}" دریافت شد. باتشکر از شما. '.format(Article), 
+                        to=[User_email],
+            )
+            Email.send()
+
+            if Parent_Email:
+                Email = EmailMessage(
+                        'به دیدگاه شما پاسخی داده شده.', 
+                        ' پاسخ جدیدی برای دیدگاهی که شمادر مقاله"{}"  نوشتید ثبت شده. برای مشاهده روی لینک مقابل کلیک کنید.  {}{}'.format(Article , Current_site , reverse('blog:details' , kwargs={'slug':Article.Slug})), 
+                        to=[Parent_Email],
+            )
+            Email.send()
+
         return UTF8JsonResponse(self.json())
 
     def form_invalid(self, form):
