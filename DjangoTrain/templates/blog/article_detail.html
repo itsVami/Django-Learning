@@ -28,7 +28,7 @@
                         {{ object.Description|safe }}
                     {% else %}
                         {{ article.Description | striptags | truncatewords:35 }}
-                        <p class="alert alert-danger">
+                        <p class="alert alert-danger my-4">
                             این مقاله ویژه است. برای مشاهده آن باید <a class="alert-danger" href="#">اشتراک ویژه</a> تهییه کنید.
                         </p>
                     {% endif %}
