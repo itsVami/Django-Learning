@@ -1,5 +1,7 @@
 {% extends 'blog/base.html' %}
 
+{% load ratings %}
+
 {% load comment_tags %}
 
 {% block title %} | {{object.Title}} {% endblock %}
@@ -13,6 +15,8 @@
                 <div class="site-heading">
                     <h1>{{ object.Title }}</h1>
                     {% if article.Is_special %} <span class="badge alert-danger" style="font-size: 15px ; border-radius: 5px ; " > ویژه </span> {% endif %}
+                    <br><br>
+                    <span>{% ratings object %}</span>
                 </div>
             </div>
         </div>
