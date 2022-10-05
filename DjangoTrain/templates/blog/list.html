@@ -38,6 +38,7 @@
                         <a href="{% url 'blog:author' article.Author %}">{{ article.Author.first_name}}</a>
                         {{ article.jpublish }}
                     </p>
+                    <span>بازدید ها :{{ article.hits.count }}</span>
                     <div>
                         {% for cat in article.CategoryRE.actived %}
                             <a href="{% url 'blog:category' cat.Slug %}">#{{ cat.Title }}</a>

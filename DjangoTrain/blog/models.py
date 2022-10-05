@@ -1,3 +1,4 @@
+from tabnanny import verbose
 from django.db import models
 from django.utils import timezone
 from extentions.utils import jalali_conventor
@@ -6,6 +7,7 @@ from account.models import User
 from django.urls import reverse
 from django.contrib.contenttypes.fields import GenericRelation
 from comment.models import Comment
+
 
 #My_Managers
 class ArticleManager(models.Manager):
@@ -16,7 +18,17 @@ class ArticleManager(models.Manager):
 class CategoryManager(models.Manager):
     def actived (self):
         return self.filter(Status = True)
-    
+
+
+#################################################    
+
+#My_Models
+class IPAdress(models.Model):
+    ip_address = models.GenericIPAddressField(verbose_name = 'آدرس آیپی')
+
+    class Meta :
+        verbose_name = 'آدرس آیپی'
+        verbose_name_plural = 'آدرس آیپی'
 
 
 class Category (models.Model):
@@ -57,6 +69,7 @@ class Article (models.Model):
     Is_special = models.BooleanField(default= False , verbose_name ='مقاله ویژه')
     Status = models.CharField(max_length=1 , choices=STATUS_CHOISECS , verbose_name ='وضعیت مقاله')
     comments = GenericRelation(Comment)
+    hits = models.ManyToManyField(IPAdress , blank = True , related_name = 'hits' , verbose_name ='بازدیدها')
 
     class Meta :
         verbose_name = 'مقاله'

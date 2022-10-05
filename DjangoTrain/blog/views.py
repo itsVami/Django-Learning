@@ -1,6 +1,6 @@
 from django.shortcuts import render , get_object_or_404
 # from django.http import HttpResponse 
-from .models import Article , Category
+from .models import Article , Category , IPAdress
 from django.views.generic import ListView , DetailView
 from account.models import User
 from account.mixins import AuthorAccessMixin
@@ -32,7 +32,14 @@ class ArticleList(ListView):
 class ArticleDetail(DetailView):
     def get_object(self):
         slug = self.kwargs.get('slug')
-        return get_object_or_404(Article.objects.published() , Slug = slug)
+        article = get_object_or_404(Article.objects.published() , Slug = slug)
+        ip_address = self.request.user.ip_address
+
+        if ip_address not in article.hits.all():
+            article.hits.add(ip_address)
+        
+        return article
+        
 
 
 # def Categori(request , slug , page=1):
