@@ -1,3 +1,4 @@
+from ipaddress import ip_address
 from tabnanny import verbose
 from django.db import models
 from django.utils import timezone
@@ -69,7 +70,7 @@ class Article (models.Model):
     Is_special = models.BooleanField(default= False , verbose_name ='مقاله ویژه')
     Status = models.CharField(max_length=1 , choices=STATUS_CHOISECS , verbose_name ='وضعیت مقاله')
     comments = GenericRelation(Comment)
-    hits = models.ManyToManyField(IPAdress , blank = True , related_name = 'hits' , verbose_name ='بازدیدها')
+    hits = models.ManyToManyField(IPAdress , through = "ArticleHit" , blank = True , related_name = 'hits' , verbose_name ='بازدیدها')
 
     class Meta :
         verbose_name = 'مقاله'
@@ -96,3 +97,9 @@ class Article (models.Model):
 
     objects = ArticleManager()
     
+
+
+class ArticleHit(models.Model):
+    article = models.ForeignKey(Article , on_delete = models.CASCADE)
+    ip_address = models.ForeignKey(IPAdress , on_delete = models.CASCADE)
+    created = models.DateTimeField(auto_now_add = True)
