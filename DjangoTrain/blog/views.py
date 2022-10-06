@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render , get_object_or_404
 # from django.http import HttpResponse 
 from .models import Article , Category , IPAdress
@@ -5,6 +6,8 @@ from django.views.generic import ListView , DetailView
 from account.models import User
 from account.mixins import AuthorAccessMixin
 
+from django.db.models import Count , Q
+from datetime import datetime , timedelta
 
 # def Home(request , page=1):
 #     articles_list = Article.objects.published()
@@ -19,7 +22,9 @@ class ArticleList(ListView):
     # model = Article
     # template_name = "blog/home.html"
     # context_object_name = "articles"
-    queryset = Article.objects.published()
+
+    last_mounth = datetime.today() - timedelta(days = 30)
+    queryset = Article.objects.published().annotate(count=Count('hits' , filter= Q(articlehit__created__gt = last_mounth))).order_by('-count' , '-Publish')[:5]
     paginate_by = 4
 
 
