@@ -1,0 +1,8 @@
+<div class="popular-article"><h2 class="h4">مقالات پر بازدید</h2> 
+    <hr> 
+    {%for a in popular_article %}  
+        <div>
+            <a href="{% url 'blog:details' a.Slug %}">{{ a.Title }}</a>
+        </div>
+    {% endfor %}
+</div>

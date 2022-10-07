@@ -1,5 +1,8 @@
 from django import template
-from ..models import Category
+from ..models import Category , Article
+
+from datetime import datetime , timedelta
+from django.db.models import Count , Q
 
 register = template.Library()
 
@@ -11,6 +14,13 @@ def Web_Title ():
 def Category_Navbar ():
     return {
         "category" : Category.objects.filter(Status=True)
+    }
+
+@register.inclusion_tag('blog/partials/popular_article.html')
+def Popular_Article ():
+    last_mounth = datetime.today() - timedelta(days = 30)
+    return {
+        "popular_article" : Article.objects.published().annotate(count=Count('hits' , filter= Q(articlehit__created__gt = last_mounth))).order_by('-count' , '-Publish')[:5]
     }
 
 @register.inclusion_tag('registration/partials/link.html')

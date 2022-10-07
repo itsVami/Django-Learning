@@ -4,6 +4,8 @@
 
 {% load static %}
 
+{% load base_tags %}
+
 {% block title %} | {% block title2 %}  {% endblock %} {% endblock %}
 
 {% block main %}
@@ -24,6 +26,7 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">    
+            {% Popular_Article %}
             <!-- Children content -->
             {% for article in object_list %}
                 <!-- Post preview-->
