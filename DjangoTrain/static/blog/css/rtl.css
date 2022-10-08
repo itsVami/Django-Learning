@@ -92,16 +92,13 @@ body {
 aside {
     width: 240px;
     position: absolute;
-    left: -240px;
-    top: 0;
+    left: 240px;
 }
   
 .popular-article {
     border: 1px solid #ddd;
     padding: 15px;
     border-radius: 7px;
-    width: 250px;
-    position: absolute;
-    left: 240px;
+    margin-bottom: 20px;
     box-shadow: -4px 4px #ddd;
 }
