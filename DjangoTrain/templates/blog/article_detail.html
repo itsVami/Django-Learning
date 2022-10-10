@@ -6,6 +6,8 @@
 
 {% load base_tags %}
 
+{% load humanize %}
+
 {% block title %} | {{object.Title}} {% endblock %}
 
 {% block main %}
@@ -47,7 +49,7 @@
                 <p class="post-meta">
                     نوشته شده توسط
                    <a href="{% url 'blog:author' object.Author %}">{{ object.Author.first_name}}</a>
-                   {{ object.jpublish }}
+                   {{ object.Publish|naturaltime }}
                 </p>
                 <!-- Comment_System -->
                 {% render_comments object request %}
