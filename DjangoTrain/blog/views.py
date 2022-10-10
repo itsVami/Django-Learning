@@ -5,6 +5,7 @@ from django.views.generic import ListView , DetailView
 from account.models import User
 from account.mixins import AuthorAccessMixin
 
+from django.db.models import Q
 
 # def Home(request , page=1):
 #     articles_list = Article.objects.published()
@@ -91,3 +92,17 @@ class ArticlePreview(AuthorAccessMixin , DetailView):
     def get_object(self):
         pk = self.kwargs.get('pk')
         return get_object_or_404(Article , pk = pk)
+
+
+class SearchList(ListView):
+    paginate_by = 4
+    template_name = "blog/search_list.html"
+
+    def get_queryset(self):
+        search = self.request.GET.get('q')
+        return Article.objects.filter(Q(Description__icontains = search) | Q(Title__icontains = search))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['search'] = self.request.GET.get('q')
+        return context

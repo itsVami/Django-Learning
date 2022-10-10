@@ -1,0 +1,16 @@
+{% extends 'blog/list.html' %}
+
+
+{% block title2 %} {{ search }} {% endblock %}
+
+{% block header2 %}  جستجو درمورد{% endblock %}
+
+{% block header %} {{ search }} {% endblock %}
+
+{% block pagination_previous_url %} 
+    {% url 'blog:search' page_obj.previous_page_number %}?q={{search}} 
+{% endblock %}
+
+{% block pagination_next_url %} 
+    {% url 'blog:search' page_obj.next_page_number %}?q={{search}}  
+{% endblock %}

@@ -92,7 +92,7 @@ body {
 aside {
     width: 240px;
     position: absolute;
-    left: -240px;
+    left: 230px;
 }
   
 .popular-article {

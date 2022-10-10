@@ -13,5 +13,11 @@
                 </li>                  
             {% endif %}
         {% endfor %}
+
+        <form class="form-inline mt-3" action="{% url 'blog:search' %}" style="margin-right: 25px ;">
+            <input class="form-control" type="text" name="q" placeholder="اینجا جستجو کنید..." style="border-radius: 8px;">
+            <button class="btn btn-success" style="padding: 5px ; border-radius: 8px ; margin-right: 8px;">جستجو</button>
+        </form>
+        
     </ul>
 </div>

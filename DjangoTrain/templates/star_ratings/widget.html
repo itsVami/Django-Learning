@@ -1,6 +1,6 @@
 {% extends "star_ratings/widget_base.html" %}
 {% block rating_detail %}
     {% if not user.is_authenticated %}
-       <div><small> برای امتیاز دهی<a href="{% url 'login' %}"> وارد  </a>شوید.  </small></div>
+       <div><small> برای امتیاز دهی<a style="color: black;" href="{% url 'login' %}"> وارد  </a>شوید.  </small></div>
     {% endif %}
 {% endblock %}

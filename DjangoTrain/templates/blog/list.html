@@ -26,12 +26,13 @@
 <div class="container px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">    
-            
-            <aside>
-                {% Popular_Article %}
-                {% Hot_Article %}
-            </aside>
-   
+        
+        <aside>
+            {% Popular_Article %}
+            {% Hot_Article %}
+        </aside>
+
+
             <!-- Children content -->
             {% for article in object_list %}
                 <!-- Post preview-->
@@ -54,7 +55,9 @@
                     </div>
                 </div>
                 <!-- Divider-->
-                <hr class="my-4" />    
+                <hr class="my-4" />  
+            {% empty %}
+                <h4 style="padding: 8px ; margin-bottom: 45px;">متاسقانه محتوایی برای نمایش در این مورد وجود ندارد.</h4>
             {% endfor %}
             <!-- Pager-->
             {% if is_paginated %}
